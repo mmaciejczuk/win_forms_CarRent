@@ -1,0 +1,1 @@
+C:\WINDOWS\Microsoft.NET\Framework\v1.0.3705\csc /out:"bin 1.0\EeekSoft.Web.PopupWin.dll" /t:library /recurse:*.cs

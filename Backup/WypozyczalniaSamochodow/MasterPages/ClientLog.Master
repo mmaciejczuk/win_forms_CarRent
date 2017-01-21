@@ -1,0 +1,78 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ClientLog.master.cs" Inherits="WypozyczalniaSamochodow.MasterPages.ClientLog" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+    <form id="Form2" runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="loginDisplay">
+                <img src="../Images/Panel_client.png" alt="obrazek" 
+                    style="height: 159px; float: left" />
+                <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="#0066FF" >LinkButton</asp:LinkButton>                
+                <br />
+                <asp:Label ID="Label1" runat="server" ForeColor="#996633" Text="Label"></asp:Label>
+                </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu2" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem NavigateUrl="~/Clients/Home.aspx" Text="Start" Value="Start">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="O firmie" Value="O firmie" 
+                            NavigateUrl="~/Clients/Firma.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Oferta wynajmu" 
+                            Value="Oferta wynajmu">
+                            <asp:MenuItem NavigateUrl="~/Samochody_osobowe_log.aspx" Text="Samochody osobowe" 
+                                Value="Samochody osobowe"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Samochody_van_log.aspx" Text="Samochody van" 
+                                Value="Samochody van">
+                            </asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Samochody_pickup_log.aspx" Text="Samochody pickup" 
+                                Value="Samochody pickup"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Samochody_dostawcze_log.aspx" 
+                                Text="Samochody dostawcze" Value="Samochody dostawcze"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Cennik" Value="Odbiór i zwrot" 
+                            NavigateUrl="~/Clients/Cennik.aspx"/>
+                        <asp:MenuItem Text="Kontakt" Value="Kontakt" 
+                            NavigateUrl="~/Clients/Kontakt.aspx"></asp:MenuItem>
+                        <asp:MenuItem Text="Rezerwacje" Value="Rezerwacje" 
+                            NavigateUrl="~/Clients/Rezerwacje.aspx"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Clients/Profil.aspx" Text="Dane osobowe" 
+                            Value="Dane osobowe"></asp:MenuItem>
+                        <asp:MenuItem Text="Skrzynka pocztowa" Value="Skrzynka pocztowa">
+                            <asp:MenuItem NavigateUrl="~/Clients/Poczta_wiadomosc.aspx" 
+                                Text="Nowa wiadomość" Value="Nowa wiadomość"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Clients/Poczta_wyslane.aspx" 
+                                Text="Wysłane wiadomości" Value="Wysłane wiadomości"></asp:MenuItem>
+                        </asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent2" runat="server"/>
+        </div>
+        <div class="clear">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="LabelLiczbaOdwiedzin" runat="server" Text="Label" 
+                style="text-align: right" ForeColor="#666633"></asp:Label>
+                <br />
+                <br />
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+    </div>
+</body>
+</html>

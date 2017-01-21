@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Employee.master.cs" Inherits="WypozyczalniaSamochodow.MasterPages.Employee" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="HeadContent3" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div>
+    <form id="Form2" runat="server">
+    <div class="page">
+        <div class="header">
+            <div class="loginDisplay">
+                <img src="../Images/Panel_prac.png" alt="obrazek" 
+                    style="height: 159px; float: left" />
+                <asp:LinkButton ID="LinkButton1" runat="server" ForeColor="#0066FF" >LinkButton</asp:LinkButton>                
+                <br />
+                <asp:Label ID="Label1" runat="server" ForeColor="#996633" Text="Label"></asp:Label>
+                </div>
+            <div class="clear hideSkiplink">
+                <asp:Menu ID="NavigationMenu3" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <Items>
+                        <asp:MenuItem Text="Rezerwacje" Value="Rezerwacje" 
+                            NavigateUrl="~/Employees/Rezerwacje.aspx">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Samochody" Value="Samochody">
+                            <asp:MenuItem Text="Wykres dostępności" Value="Wykres dostępności" 
+                                NavigateUrl="~/Employees/WykresDostepnosci.aspx">
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Dokumentacja" Value="Dokumentacja" 
+                                NavigateUrl="~/Employees/Dokumentacja.aspx"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="Aktualności" Value="Aktualności" 
+                            NavigateUrl="~/Employees/Aktualnosci.aspx"></asp:MenuItem>
+                    </Items>
+                </asp:Menu>
+            </div>
+        </div>
+        <div class="main">
+            <asp:ContentPlaceHolder ID="MainContent3" runat="server"/>
+        </div>
+        <div class="clear">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="LabelLiczbaOdwiedzin" runat="server" Text="Label" 
+                style="text-align: right" ForeColor="#666633"></asp:Label>
+                <br />
+                <br />
+        </div>
+    </div>
+    <div class="footer">
+        
+    </div>
+    </form>
+    </div>
+</body>
+</html>

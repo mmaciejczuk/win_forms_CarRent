@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WypozyczalniaSamochodowModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="WypozyczalniaSamochodowEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admins" EntityType="WypozyczalniaSamochodowModel.Admin" />
+    <EntitySet Name="BodyTypes" EntityType="WypozyczalniaSamochodowModel.BodyType" />
+    <EntitySet Name="CarDocumentations" EntityType="WypozyczalniaSamochodowModel.CarDocumentation" />
+    <EntitySet Name="Cars" EntityType="WypozyczalniaSamochodowModel.Car" />
+    <EntitySet Name="Clients" EntityType="WypozyczalniaSamochodowModel.Client" />
+    <EntitySet Name="Employees" EntityType="WypozyczalniaSamochodowModel.Employee" />
+    <EntitySet Name="FuelTypes" EntityType="WypozyczalniaSamochodowModel.FuelType" />
+    <EntitySet Name="Payments" EntityType="WypozyczalniaSamochodowModel.Payment" />
+    <EntitySet Name="Prices" EntityType="WypozyczalniaSamochodowModel.Price" />
+    <EntitySet Name="ReservationDetails" EntityType="WypozyczalniaSamochodowModel.ReservationDetail" />
+    <EntitySet Name="Reservations" EntityType="WypozyczalniaSamochodowModel.Reservation" />
+    <EntitySet Name="Statuses" EntityType="WypozyczalniaSamochodowModel.Status" />
+    <EntitySet Name="sysdiagrams" EntityType="WypozyczalniaSamochodowModel.sysdiagram" />
+    <AssociationSet Name="FK_Samochody_RodzajeNadwozi" Association="WypozyczalniaSamochodowModel.FK_Samochody_RodzajeNadwozi">
+      <End Role="BodyTypes" EntitySet="BodyTypes" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Documentations_Cars" Association="WypozyczalniaSamochodowModel.FK_Documentations_Cars">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="CarDocumentations" EntitySet="CarDocumentations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Samochody_Cenniki" Association="WypozyczalniaSamochodowModel.FK_Samochody_Cenniki">
+      <End Role="Prices" EntitySet="Prices" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Samochody_RodzajePaliw" Association="WypozyczalniaSamochodowModel.FK_Samochody_RodzajePaliw">
+      <End Role="FuelTypes" EntitySet="FuelTypes" />
+      <End Role="Cars" EntitySet="Cars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SzczegolyRezerwacji_Samochody" Association="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Samochody">
+      <End Role="Cars" EntitySet="Cars" />
+      <End Role="ReservationDetails" EntitySet="ReservationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rezerwacje_Klienci" Association="WypozyczalniaSamochodowModel.FK_Rezerwacje_Klienci">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="Reservations" EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SzczegolyRezerwacji_Pracownicy" Association="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Pracownicy">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="ReservationDetails" EntitySet="ReservationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SzczegolyRezerwacji_Platnosci" Association="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Platnosci">
+      <End Role="Payments" EntitySet="Payments" />
+      <End Role="ReservationDetails" EntitySet="ReservationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SzczegolyRezerwacji_StatusyRezerwacji" Association="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_StatusyRezerwacji">
+      <End Role="Statuses" EntitySet="Statuses" />
+      <End Role="ReservationDetails" EntitySet="ReservationDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SzczegolyRezerwacji_SzczegolyRezerwacji" Association="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_SzczegolyRezerwacji">
+      <End Role="Reservations" EntitySet="Reservations" />
+      <End Role="ReservationDetails" EntitySet="ReservationDetails" />
+    </AssociationSet>
+    <EntitySet Name="Banneds" EntityType="WypozyczalniaSamochodowModel.Banned" />
+    <AssociationSet Name="FK_Clients_Banned" Association="WypozyczalniaSamochodowModel.FK_Clients_Banned">
+      <End Role="Banned" EntitySet="Banneds" />
+      <End Role="Client" EntitySet="Clients" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id_admina" />
+    </Key>
+    <Property Name="id_admina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="haslo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="BodyType">
+    <Key>
+      <PropertyRef Name="id_nadwozia" />
+    </Key>
+    <Property Name="id_nadwozia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rodzaj_nadwozia" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="Cars" Relationship="WypozyczalniaSamochodowModel.FK_Samochody_RodzajeNadwozi" FromRole="BodyTypes" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="CarDocumentation">
+    <Key>
+      <PropertyRef Name="id_dokumentacji" />
+      <PropertyRef Name="id_samochodu" />
+    </Key>
+    <Property Name="id_dokumentacji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_samochodu" Type="Int32" Nullable="false" />
+    <Property Name="nr_rejestracyjny" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="data_kolejnego_przegladu" Type="DateTime" />
+    <NavigationProperty Name="Car" Relationship="WypozyczalniaSamochodowModel.FK_Documentations_Cars" FromRole="CarDocumentations" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="Car">
+    <Key>
+      <PropertyRef Name="id_samochodu" />
+    </Key>
+    <Property Name="id_samochodu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="marka" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="model" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="miejsc_siedzacych" Type="Int16" />
+    <Property Name="ladownosc" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="pojemnosc_silnika" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="moc" Type="Int32" />
+    <Property Name="zuzycie_paliwa" Type="Decimal" Precision="2" Scale="1" />
+    <Property Name="rocznik" Type="Int32" />
+    <Property Name="zdjecie" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="id_cennika" Type="Int32" Nullable="false" />
+    <Property Name="rodzaj_nadwozia" Type="Int32" Nullable="false" />
+    <Property Name="rodzaj_paliwa" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="BodyType" Relationship="WypozyczalniaSamochodowModel.FK_Samochody_RodzajeNadwozi" FromRole="Cars" ToRole="BodyTypes" />
+    <NavigationProperty Name="CarDocumentations" Relationship="WypozyczalniaSamochodowModel.FK_Documentations_Cars" FromRole="Cars" ToRole="CarDocumentations" />
+    <NavigationProperty Name="Price" Relationship="WypozyczalniaSamochodowModel.FK_Samochody_Cenniki" FromRole="Cars" ToRole="Prices" />
+    <NavigationProperty Name="FuelType" Relationship="WypozyczalniaSamochodowModel.FK_Samochody_RodzajePaliw" FromRole="Cars" ToRole="FuelTypes" />
+    <NavigationProperty Name="ReservationDetails" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Samochody" FromRole="Cars" ToRole="ReservationDetails" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="id_klienta" />
+    </Key>
+    <Property Name="id_klienta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imie" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="nazwisko" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="pesel" Type="Int32" />
+    <Property Name="miasto" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="kod" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+    <Property Name="ulica" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="nr_domu" Type="Int32" />
+    <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Reservations" Relationship="WypozyczalniaSamochodowModel.FK_Rezerwacje_Klienci" FromRole="Clients" ToRole="Reservations" />
+    <Property Type="Int32" Name="banned" />
+    <NavigationProperty Name="Banned1" Relationship="WypozyczalniaSamochodowModel.FK_Clients_Banned" FromRole="Client" ToRole="Banned" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id_pracownika" />
+    </Key>
+    <Property Name="id_pracownika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imie" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="nazwisko" Type="String" MaxLength="20" Unicode="true" FixedLength="true" />
+    <Property Name="data_zatrudnienia" Type="DateTime" />
+    <Property Name="data_wypowiedzenia" Type="DateTime" />
+    <NavigationProperty Name="ReservationDetails" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Pracownicy" FromRole="Employees" ToRole="ReservationDetails" />
+  </EntityType>
+  <EntityType Name="FuelType">
+    <Key>
+      <PropertyRef Name="id_paliwa" />
+    </Key>
+    <Property Name="id_paliwa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rodzaj_paliwa" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Cars" Relationship="WypozyczalniaSamochodowModel.FK_Samochody_RodzajePaliw" FromRole="FuelTypes" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="Payment">
+    <Key>
+      <PropertyRef Name="id_platnosci" />
+    </Key>
+    <Property Name="id_platnosci" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="sposob_platnosci" Type="String" MaxLength="15" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="ReservationDetails" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Platnosci" FromRole="Payments" ToRole="ReservationDetails" />
+  </EntityType>
+  <EntityType Name="Price">
+    <Key>
+      <PropertyRef Name="id_cennika" />
+    </Key>
+    <Property Name="id_cennika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cena_za_km" Type="Decimal" Precision="4" Scale="2" />
+    <Property Name="cena_za_dobe" Type="Int32" />
+    <Property Name="km_wliczone_doba" Type="Int32" />
+    <Property Name="cena_za_tydz" Type="Int32" />
+    <Property Name="km_wliczone_tydz" Type="Int32" />
+    <Property Name="cena_za_miesiac" Type="Int32" />
+    <Property Name="km_wliczone_miesiac" Type="Int32" />
+    <Property Name="kaucja" Type="Int32" />
+    <NavigationProperty Name="Cars" Relationship="WypozyczalniaSamochodowModel.FK_Samochody_Cenniki" FromRole="Prices" ToRole="Cars" />
+  </EntityType>
+  <EntityType Name="ReservationDetail">
+    <Key>
+      <PropertyRef Name="id_samochodu" />
+      <PropertyRef Name="id_rezerwacji" />
+      <PropertyRef Name="platnosc" />
+      <PropertyRef Name="status" />
+      <PropertyRef Name="pracownik" />
+    </Key>
+    <Property Name="id_samochodu" Type="Int32" Nullable="false" />
+    <Property Name="id_rezerwacji" Type="Int32" Nullable="false" />
+    <Property Name="platnosc" Type="Int32" Nullable="false" />
+    <Property Name="status" Type="Int32" Nullable="false" />
+    <Property Name="pracownik" Type="Int32" Nullable="false" />
+    <Property Name="rabat" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="data_wypozyczenia" Type="DateTime" />
+    <Property Name="data_zwrotu" Type="DateTime" />
+    <Property Name="uwagi" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Car" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Samochody" FromRole="ReservationDetails" ToRole="Cars" />
+    <NavigationProperty Name="Employee" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Pracownicy" FromRole="ReservationDetails" ToRole="Employees" />
+    <NavigationProperty Name="Payment" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_Platnosci" FromRole="ReservationDetails" ToRole="Payments" />
+    <NavigationProperty Name="Status1" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_StatusyRezerwacji" FromRole="ReservationDetails" ToRole="Statuses" />
+    <NavigationProperty Name="Reservation" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_SzczegolyRezerwacji" FromRole="ReservationDetails" ToRole="Reservations" />
+  </EntityType>
+  <EntityType Name="Reservation">
+    <Key>
+      <PropertyRef Name="id_rezerwacji" />
+    </Key>
+    <Property Name="id_rezerwacji" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_klienta" Type="Int32" Nullable="false" />
+    <Property Name="data_aktualizacji" Type="DateTime" />
+    <NavigationProperty Name="Client" Relationship="WypozyczalniaSamochodowModel.FK_Rezerwacje_Klienci" FromRole="Reservations" ToRole="Clients" />
+    <NavigationProperty Name="ReservationDetails" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_SzczegolyRezerwacji" FromRole="Reservations" ToRole="ReservationDetails" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="id_statusu" />
+    </Key>
+    <Property Name="id_statusu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="status1" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="ReservationDetails" Relationship="WypozyczalniaSamochodowModel.FK_SzczegolyRezerwacji_StatusyRezerwacji" FromRole="Statuses" ToRole="ReservationDetails" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Samochody_RodzajeNadwozi">
+    <End Role="BodyTypes" Type="WypozyczalniaSamochodowModel.BodyType" Multiplicity="1" />
+    <End Role="Cars" Type="WypozyczalniaSamochodowModel.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BodyTypes">
+        <PropertyRef Name="id_nadwozia" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="rodzaj_nadwozia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Documentations_Cars">
+    <End Role="Cars" Type="WypozyczalniaSamochodowModel.Car" Multiplicity="1" />
+    <End Role="CarDocumentations" Type="WypozyczalniaSamochodowModel.CarDocumentation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="id_samochodu" />
+      </Principal>
+      <Dependent Role="CarDocumentations">
+        <PropertyRef Name="id_samochodu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Samochody_Cenniki">
+    <End Role="Prices" Type="WypozyczalniaSamochodowModel.Price" Multiplicity="1" />
+    <End Role="Cars" Type="WypozyczalniaSamochodowModel.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prices">
+        <PropertyRef Name="id_cennika" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="id_cennika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Samochody_RodzajePaliw">
+    <End Role="FuelTypes" Type="WypozyczalniaSamochodowModel.FuelType" Multiplicity="1" />
+    <End Role="Cars" Type="WypozyczalniaSamochodowModel.Car" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FuelTypes">
+        <PropertyRef Name="id_paliwa" />
+      </Principal>
+      <Dependent Role="Cars">
+        <PropertyRef Name="rodzaj_paliwa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SzczegolyRezerwacji_Samochody">
+    <End Role="Cars" Type="WypozyczalniaSamochodowModel.Car" Multiplicity="1" />
+    <End Role="ReservationDetails" Type="WypozyczalniaSamochodowModel.ReservationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cars">
+        <PropertyRef Name="id_samochodu" />
+      </Principal>
+      <Dependent Role="ReservationDetails">
+        <PropertyRef Name="id_samochodu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rezerwacje_Klienci">
+    <End Role="Clients" Type="WypozyczalniaSamochodowModel.Client" Multiplicity="1" />
+    <End Role="Reservations" Type="WypozyczalniaSamochodowModel.Reservation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="id_klienta" />
+      </Principal>
+      <Dependent Role="Reservations">
+        <PropertyRef Name="id_klienta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SzczegolyRezerwacji_Pracownicy">
+    <End Role="Employees" Type="WypozyczalniaSamochodowModel.Employee" Multiplicity="1" />
+    <End Role="ReservationDetails" Type="WypozyczalniaSamochodowModel.ReservationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id_pracownika" />
+      </Principal>
+      <Dependent Role="ReservationDetails">
+        <PropertyRef Name="pracownik" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SzczegolyRezerwacji_Platnosci">
+    <End Role="Payments" Type="WypozyczalniaSamochodowModel.Payment" Multiplicity="1" />
+    <End Role="ReservationDetails" Type="WypozyczalniaSamochodowModel.ReservationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Payments">
+        <PropertyRef Name="id_platnosci" />
+      </Principal>
+      <Dependent Role="ReservationDetails">
+        <PropertyRef Name="platnosc" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SzczegolyRezerwacji_StatusyRezerwacji">
+    <End Role="Statuses" Type="WypozyczalniaSamochodowModel.Status" Multiplicity="1" />
+    <End Role="ReservationDetails" Type="WypozyczalniaSamochodowModel.ReservationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statuses">
+        <PropertyRef Name="id_statusu" />
+      </Principal>
+      <Dependent Role="ReservationDetails">
+        <PropertyRef Name="status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SzczegolyRezerwacji_SzczegolyRezerwacji">
+    <End Role="Reservations" Type="WypozyczalniaSamochodowModel.Reservation" Multiplicity="1" />
+    <End Role="ReservationDetails" Type="WypozyczalniaSamochodowModel.ReservationDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Reservations">
+        <PropertyRef Name="id_rezerwacji" />
+      </Principal>
+      <Dependent Role="ReservationDetails">
+        <PropertyRef Name="id_rezerwacji" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Banned">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="name" MaxLength="3" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Clients" Relationship="WypozyczalniaSamochodowModel.FK_Clients_Banned" FromRole="Banned" ToRole="Client" />
+  </EntityType>
+  <Association Name="FK_Clients_Banned">
+    <End Type="WypozyczalniaSamochodowModel.Banned" Role="Banned" Multiplicity="0..1" />
+    <End Type="WypozyczalniaSamochodowModel.Client" Role="Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Banned">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="banned" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

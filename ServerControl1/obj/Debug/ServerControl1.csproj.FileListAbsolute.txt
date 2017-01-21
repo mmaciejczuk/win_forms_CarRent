@@ -1,0 +1,5 @@
+C:\Users\sony\Documents\Visual Studio 2010\Projects\WypozyczalniaSamochodow\ServerControl1\bin\Debug\ServerControl1.dll
+C:\Users\sony\Documents\Visual Studio 2010\Projects\WypozyczalniaSamochodow\ServerControl1\bin\Debug\ServerControl1.pdb
+C:\Users\sony\Documents\Visual Studio 2010\Projects\WypozyczalniaSamochodow\ServerControl1\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\sony\Documents\Visual Studio 2010\Projects\WypozyczalniaSamochodow\ServerControl1\obj\Debug\ServerControl1.dll
+C:\Users\sony\Documents\Visual Studio 2010\Projects\WypozyczalniaSamochodow\ServerControl1\obj\Debug\ServerControl1.pdb
